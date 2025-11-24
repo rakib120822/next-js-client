@@ -8,10 +8,11 @@ function Navbar() {
         <Link href={"/"}>Home</Link>
       </li>
       <li>
-        <Link href={"/"}>Add Products</Link>
+        <Link href={"/add-products"}>Add Products</Link>
       </li>
+
       <li>
-        <Link href={"/"}>Dashboard</Link>
+        <Link href={"/dashboard"}>Dashboard</Link>
       </li>
     </>
   );
@@ -43,7 +44,9 @@ function Navbar() {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="font-bold text-2xl text-red-600">
+          F<span className="text-white">OO</span>DY
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>

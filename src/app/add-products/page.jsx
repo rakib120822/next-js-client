@@ -1,35 +1,117 @@
-import React from "react";
+"use client";
+import ProtectedRoute from "@/component/ProtectedRoute";
+import React, { useState } from "react";
 
-function AddProducts() {
+function AddProducts({ onAdd }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const data = {
+      productName: e.target.productName.value,
+      productDescription: e.target.productDescription.value,
+      productPrice: parseFloat(e.target.productPrice.value),
+      category: e.target.category.value,
+      sellerUserName: e.target.sellerUserName.value,
+      sellerEmail: e.target.sellerEmail.value,
+      productImage: e.target.photoURL.value,
+    };
+
+    try {
+      const res = await fetch("http://localhost:8080/product", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error("Failed to add product");
+
+      const result = await res.json();
+
+      // Call parent callback to update dashboard immediately
+      if (onAdd) onAdd({ ...data, _id: result.insertedId });
+
+      alert("Product added");
+      e.target.reset(); // Reset form
+    } catch (err) {
+      console.error(err);
+      alert("Error adding product");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className=" flex justify-center mt-[40px]">
-      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-        <div className="card-body">
-          <fieldset className="fieldset">
-            <label className="label">Name</label>
-            <input type="text" className="input" placeholder="Your Name" />
-            <label className="label">Email</label>
-            <input type="email" className="input" placeholder="Email" />
-            <label className="label">Product Name</label>
-            <input type="text" className="input" placeholder="Product Name" />
-            <label className="label">Description</label>
-            <input type="text" className="input" placeholder="Description" />
-            <div className="flex gap-5 mt-1">
-              <div>
-                <label className="label">Price</label>
-                <input type="number" className="input" placeholder="Price" />
-              </div>
-              <div>
-                <label className="label">Category</label>
-                <input type="text" className="input" placeholder="Category" />
-              </div>
-            </div>
-
-            <button className="btn bg-red-600 mt-4">Add Product</button>
-          </fieldset>
+    <ProtectedRoute>
+      <div className="flex justify-center mt-10">
+        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+          <div className="card-body">
+            <form onSubmit={handleSubmit}>
+              <fieldset className="fieldset">
+                <label className="label">Name</label>
+                <input
+                  type="text"
+                  className="input"
+                  name="sellerUserName"
+                  required
+                />
+                <label className="label">Email</label>
+                <input
+                  type="email"
+                  className="input"
+                  name="sellerEmail"
+                  required
+                />
+                <label className="label">Product Name</label>
+                <input
+                  type="text"
+                  className="input"
+                  name="productName"
+                  required
+                />
+                <label className="label">Product Image URL</label>
+                <input type="text" className="input" name="photoURL" required />
+                <label className="label">Description</label>
+                <input
+                  type="text"
+                  className="input"
+                  name="productDescription"
+                  required
+                />
+                <div className="flex gap-5 mt-1">
+                  <div>
+                    <label className="label">Price</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      className="input"
+                      name="productPrice"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="label">Category</label>
+                    <input
+                      type="text"
+                      className="input"
+                      name="category"
+                      required
+                    />
+                  </div>
+                </div>
+                <button className="btn bg-red-600 mt-4" disabled={loading}>
+                  {loading ? "Adding..." : "Add Product"}
+                </button>
+              </fieldset>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </ProtectedRoute>
   );
 }
 

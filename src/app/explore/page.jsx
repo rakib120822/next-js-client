@@ -6,7 +6,7 @@ async function AllProductPage() {
   const products = await data.json();
 
   return (
-    <div>
+    <div className="px-5">
       <AllProduct products={products} />
     </div>
   );

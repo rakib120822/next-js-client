@@ -4,12 +4,32 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useContext } from "react";
+import Swal from "sweetalert2";
 
 function Navbar() {
   const { user, setUser, logOut } = useContext(AuthContext);
   const pathname = usePathname();
   const handleLogOut = () => {
-    logOut().then(() => alert("Log Out successful"));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Are you sure to log out",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut().then(() =>
+          Swal.fire({
+            title: "Log Out!",
+            text: "You are successfully Logged out",
+            icon: "success",
+          })
+        );
+      }
+    });
+
     setUser(null);
   };
 
@@ -87,7 +107,7 @@ function Navbar() {
   );
 
   return (
-    <div className="navbar  backdrop-blur-md z-1000 shadow-sm sticky top-0">
+    <div className="navbar  backdrop-blur-md z-1000 shadow-sm sticky top-0 p-5">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/component/Navbar";
 import Footer from "@/component/footer/Footer";
 import ClientAuthProvider from "@/component/ClientAuthProvider";
-
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -28,6 +28,7 @@ export default function RootLayout({ children }) {
           {children}
           <Footer />
         </ClientAuthProvider>
+        <ToastContainer />
       </body>
     </html>
   );

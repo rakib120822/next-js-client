@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function HeroSection() {
   return (
-    <div className="carousel w-full h-[450px]">
+    <div className="carousel w-full h-[350px]">
       <div id="slide1" className="carousel-item relative w-full">
         <Image
           src="https://i.ibb.co/pBQm21xh/1.jpg"

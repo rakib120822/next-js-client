@@ -13,7 +13,7 @@ function BrandLogo() {
   ];
   return (
     <div>
-      <h2 className="text-4xl font-bold text-center my-5">
+      <h2 className="text-4xl font-bold text-center my-10">
         <span className="text-red-600">Our</span> Supporters
       </h2>
       <Marquee pauseOnHover speed={50} autoFill>

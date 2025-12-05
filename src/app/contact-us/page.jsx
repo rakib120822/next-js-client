@@ -1,17 +1,24 @@
+"use client";
 import React from "react";
+import { toast } from "react-toastify";
 
 function ContactPage() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    toast.success("Thanks for your feedback");
+    e.target.reset();
+  };
+
   return (
     <div>
-      return (
-      <section className=" py-16 px-6 md:px-20">
-        <div className="max-w-4xl mx-auto">
+      <section className=" px-5">
+        <div className="my-10">
           {/* Title */}
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 text-center ">
             <span className="text-red-600">Feature</span> Section
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-center mt-4">
-            Have questions or feedback? We'd love to hear from you!
+            Have questions or feedback? We&apos;d love to hear from you!
           </p>
 
           {/* Content */}
@@ -46,7 +53,7 @@ function ContactPage() {
 
             {/* Contact Form */}
             <div className="md:w-1/2 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-              <form className="flex flex-col gap-4">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div>
                   <label className="block text-gray-700 dark:text-gray-200 font-medium">
                     Name

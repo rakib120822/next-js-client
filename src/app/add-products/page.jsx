@@ -1,10 +1,13 @@
 "use client";
 import ProtectedRoute from "@/component/ProtectedRoute";
-import React, { useState } from "react";
+import AuthContext from "@/context/AuthContext";
+import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 function AddProducts({ onAdd }) {
   const [loading, setLoading] = useState(false);
 
+  const { user } = useContext(AuthContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -35,11 +38,11 @@ function AddProducts({ onAdd }) {
       // Call parent callback to update dashboard immediately
       if (onAdd) onAdd({ ...data, _id: result.insertedId });
 
-      alert("Product added");
+      toast.success("Product added");
       e.target.reset(); // Reset form
     } catch (err) {
       console.error(err);
-      alert("Error adding product");
+      toast.error("Error adding product");
     } finally {
       setLoading(false);
     }
@@ -57,6 +60,7 @@ function AddProducts({ onAdd }) {
                   type="text"
                   className="input"
                   name="sellerUserName"
+                  defaultValue={user?.displayName}
                   required
                 />
                 <label className="label">Email</label>
@@ -64,6 +68,7 @@ function AddProducts({ onAdd }) {
                   type="email"
                   className="input"
                   name="sellerEmail"
+                  defaultValue={user?.email}
                   required
                 />
                 <label className="label">Product Name</label>

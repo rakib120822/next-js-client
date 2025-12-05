@@ -5,9 +5,9 @@ import HeroSection from "@/component/heroSection/HeroSection";
 
 export default function Home() {
   return (
-    <div>
+    <div className="p-5">
       <HeroSection />
-      <div className="max-w-7xl mx-auto my-[100px] px-10">
+      <div>
         <LatestProducts />
         <FeatureSection />
         <BrandLogo />

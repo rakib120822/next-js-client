@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Card from "./component/Card";
 import ProtectedRoute from "@/component/ProtectedRoute";
 import AuthContext from "@/context/AuthContext";
+import Swal from "sweetalert2";
 
 export default function Dashboard() {
   const [products, setProducts] = useState([]);
@@ -17,13 +18,30 @@ export default function Dashboard() {
 
   // This will be passed to Card component
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:8080/product/${id}`, {
-      method: "DELETE",
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:8080/product/${id}`, {
+          method: "DELETE",
+        }).then(() => {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+          setProducts((prev) => prev.filter((p) => p._id !== id));
+        });
+      }
     });
 
     //  Update UI instantly
-    setProducts((prev) => prev.filter((p) => p._id !== id));
-    alert("product deleted");
   };
 
   return (

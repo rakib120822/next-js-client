@@ -26,7 +26,6 @@ export default async function DetailPage({ params }) {
           className="max-w-sm rounded-lg shadow-2xl"
           alt="product image"
         />
-
         <div>
           <h1 className="text-5xl font-bold">{product.productName}</h1>
           <p className="py-1">Category : {product.productDescription}</p>

@@ -30,7 +30,7 @@ function ContactPage() {
                   Address
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">
-                  123 Foody Street, Flavor Town, FT 12345
+                  Dhaka, Bangladesh
                 </p>
               </div>
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
@@ -38,7 +38,7 @@ function ContactPage() {
                   Email
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">
-                  support@foody.com
+                  payelrakibulislam@gmail.com
                 </p>
               </div>
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
@@ -46,7 +46,7 @@ function ContactPage() {
                   Phone
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">
-                  +1 234 567 890
+                  +880 1883 860 565
                 </p>
               </div>
             </div>

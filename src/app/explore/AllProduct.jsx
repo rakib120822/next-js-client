@@ -7,9 +7,13 @@ function AllProduct({ products }) {
   const [allProducts, setAllProducts] = useState(products || []);
   const handleSort = (order) => {
     if (order == "asc") {
-      setAllProducts(products.sort((a, b) => a.productPrice - b.productPrice));
+      setAllProducts(
+        [...products].sort((a, b) => a.productPrice - b.productPrice)
+      );
     } else {
-      setAllProducts(products.sort((a, b) => b.productPrice - a.productPrice));
+      setAllProducts(
+        [...products].sort((a, b) => b.productPrice - a.productPrice)
+      );
     }
   };
   return (
@@ -28,7 +32,7 @@ function AllProduct({ products }) {
         </select>
       </div>
       <div className=" gap-10 grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
+        {allProducts.map((product) => (
           <LatestProductCard key={product._id} product={product} />
         ))}
       </div>

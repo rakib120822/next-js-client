@@ -2,7 +2,7 @@ import React from "react";
 import LatestProductCard from "../card/LatestProductCard";
 
 async function LatestProducts() {
-  const data = await fetch("http://localhost:8080/product");
+  const data = await fetch("http://localhost:8080/latest");
   const products = await data.json();
 
   return (

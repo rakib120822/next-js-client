@@ -15,6 +15,7 @@ function LatestProductCard({ product }) {
       <div className="card-body">
         <h2 className="card-title">{product?.productName}</h2>
         <p>{product?.productDescription}</p>
+        <p>price : ${product?.productPrice}</p>
         <div className="card-actions justify-end">
           <Link href={`/dashboard/${product?._id}`} className="btn bg-red-600">
             View Details
